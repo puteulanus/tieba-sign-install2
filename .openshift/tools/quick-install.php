@@ -52,6 +52,9 @@ $_config = array(
 		'pconnect' => $db_pconnect,
 		),
 	);
+$content = '<?php'.PHP_EOL.'/* Auto-generated config file */'.PHP_EOL.'$_config = ';
+$content .= var_export($_config, true).';'.PHP_EOL.'?>';
+file_put_contents($config_file, $content);
 
 // 自定函数
 function runquery($sql, $link){
