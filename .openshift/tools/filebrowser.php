@@ -58,7 +58,7 @@ $editfiles=array('php','phtml','tpl','sql','txt','htm','html','js','css');
 /*设定允许删除的文件
  * $delfiles=array('ALLFILES');//全部文件
  */
-$delfiles=array('php','phtml','tpl','sql','txt','html','docx',
+$delfiles=array('php','phtml','tpl','sql','txt','html','docx','css','js',
 'jpg','gif','png','bmp',
 'zip','gz','rar','zip','iso',
 'doc','xls','xlsx','ppt','wps',
@@ -73,7 +73,7 @@ $newfile=array('php','phtml','tpl','sql','txt','htm','html','js','css');
 /*
  * 设定允许上传的文件
  */
-$upfilestr=array('txt','html','php'
+$upfilestr=array('txt','html','php','css','js',
 'jpg','gif','png','bmp',
 'zip','gz','rar','zip','iso',
 'doc','xls','xlsx','ppt','wps',
