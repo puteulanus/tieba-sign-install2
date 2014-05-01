@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# 复制安装文件
+cp -f ${OPENSHIFT_REPO_DIR}.openshift/tools/quick-install.php ${OPENSHIFT_REPO_DIR}install/quick-install.php
+
+# 数据库初始化
+php ${OPENSHIFT_REPO_DIR}install/quick-install.php
+sleep 10
+
+#读取系统密码并删除密码文件
+cd ${OPENSHIFT_REPO_DIR}install/
+password=`cat pd.txt`
+rm -rf ${OPENSHIFT_REPO_DIR}install/pd.txt
+
+# 设定文件管理器密码
+cd ${OPENSHIFT_REPO_DIR}filebrowser/
+echo '<?php'>config.php
+echo '$password="'$password'"'>>config.php
+echo '?>'>>config.php
+
+# 生成密码页面
+cd ${OPENSHIFT_REPO_DIR}install/
+echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' >info.html
+echo '<font color="#FF0000">' >>info.html
+echo '    此页面内容非常重要，请牢记后'>>info.html
+echo '    <a href="'${OPENSHIFT_APP_DNS}'/install/delete.php">'>>info.html
+echo '        <font color="#0000FF">'>>info.html
+echo '            点我'>>info.html
+echo '        </font>'>>info.html
+echo '    </a>'>>info.html
+echo '    删除页面'>>info.html
+echo '</font>'>>info.html
+echo '<br>'>>info.html
+echo '<br>'>>info.html
+echo '签到助手管理员账号：default'>>info.html
+echo '<br>'>>info.html
+echo '签到助手密码：'$password>>info.html
+echo '<br>'>>info.html
+echo '<br>'>>info.html
+echo '文件管理器地址：'${OPENSHIFT_APP_DNS}'/file'>>info.html
+echo '<br>'>>info.html
+echo '文件管理器密码：'$password>>info.html
+echo '<br>'>>info.html
+# 密码页面删除链接
+echo '<?php'>delete.php
+echo 'unlink("info.html")'>>delete.php
+echo '?>'>>delete.php
+
+# 删除安装文件
+rm -rf ${OPENSHIFT_REPO_DIR}install/quick-install.php
