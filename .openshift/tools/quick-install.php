@@ -54,7 +54,7 @@ $_config = array(
 	);
 $content = '<?php'.PHP_EOL.'/* Auto-generated config file */'.PHP_EOL.'$_config = ';
 $content .= var_export($_config, true).';'.PHP_EOL.'?>';
-file_put_contents($config_file, $content);
+file_put_contents('config.inc.php', $content);
 
 // 自定函数
 function runquery($sql, $link){

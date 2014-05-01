@@ -6,7 +6,7 @@ cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/quick-install.php ${OPENSHIFT_REPO_
 # 数据库初始化
 cd ${OPENSHIFT_REPO_DIR}php/install/
 php quick-install.php
-sleep 10
+mv -f ${OPENSHIFT_REPO_DIR}php/install/config.inc.php ${OPENSHIFT_REPO_DIR}php/system/
 
 #读取系统密码并删除密码文件
 cd ${OPENSHIFT_REPO_DIR}php/install/
