@@ -1,1 +1,1 @@
-php ${OPENSHIFT_REPO_DIR}cron.php
+php ${OPENSHIFT_REPO_DIR}php/cron.php
