@@ -1,25 +1,25 @@
 #!/bin/bash
 
 # 复制安装文件
-cp -f ${OPENSHIFT_REPO_DIR}.openshift/tools/quick-install.php ${OPENSHIFT_REPO_DIR}install/quick-install.php
+cp -f ${OPENSHIFT_REPO_DIR}.openshift/tools/quick-install.php ${OPENSHIFT_REPO_DIR}php/install/quick-install.php
 
 # 数据库初始化
-php ${OPENSHIFT_REPO_DIR}install/quick-install.php
+php ${OPENSHIFT_REPO_DIR}php/install/quick-install.php
 sleep 10
 
 #读取系统密码并删除密码文件
-cd ${OPENSHIFT_REPO_DIR}install/
+cd ${OPENSHIFT_REPO_DIR}php/install/
 password=`cat pd.txt`
-rm -rf ${OPENSHIFT_REPO_DIR}install/pd.txt
+rm -rf ${OPENSHIFT_REPO_DIR}php/install/pd.txt
 
 # 设定文件管理器密码
-cd ${OPENSHIFT_REPO_DIR}filebrowser/
+cd ${OPENSHIFT_REPO_DIR}php/filebrowser/
 echo '<?php'>config.php
 echo '$password="'$password'"'>>config.php
 echo '?>'>>config.php
 
 # 生成密码页面
-cd ${OPENSHIFT_REPO_DIR}install/
+cd ${OPENSHIFT_REPO_DIR}php/install/
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' >info.html
 echo '<font color="#FF0000">' >>info.html
 echo '    此页面内容非常重要，请牢记后'>>info.html
@@ -47,4 +47,4 @@ echo 'unlink("info.html")'>>delete.php
 echo '?>'>>delete.php
 
 # 删除安装文件
-rm -rf ${OPENSHIFT_REPO_DIR}install/quick-install.php
+rm -rf ${OPENSHIFT_REPO_DIR}php/install/quick-install.php
