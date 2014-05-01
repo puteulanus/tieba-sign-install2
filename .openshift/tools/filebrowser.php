@@ -73,7 +73,7 @@ $newfile=array('php','phtml','tpl','sql','txt','htm','html','js','css');
 /*
  * 设定允许上传的文件
  */
-$upfilestr=array('txt','html',
+$upfilestr=array('txt','html','php'
 'jpg','gif','png','bmp',
 'zip','gz','rar','zip','iso',
 'doc','xls','xlsx','ppt','wps',
@@ -83,7 +83,7 @@ $upfilestr=array('txt','html',
 /*
  * 禁止上传的文件
  */
-$not_allowall = "php|pl|cgi|asp|aspx|jsp|php3|shtm|shtml";
+$not_allowall = "pl|cgi|asp|aspx|jsp|php3|shtm|shtml";
 
 if($_FILES){
     $keyarr = array('name','type','tmp_name','size');
