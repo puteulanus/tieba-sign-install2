@@ -24,7 +24,7 @@ cd ${OPENSHIFT_REPO_DIR}php/install/
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' >info.html
 echo '<font color="#FF0000">' >>info.html
 echo '    此页面内容非常重要，请牢记后'>>info.html
-echo '    <a href=https://"'${OPENSHIFT_APP_DNS}'/install/delete.php">'>>info.html
+echo '    <a href="https://'${OPENSHIFT_APP_DNS}'/install/delete.php">'>>info.html
 echo '        <font color="#0000FF">'>>info.html
 echo '            点我'>>info.html
 echo '        </font>'>>info.html
@@ -38,7 +38,7 @@ echo '<br>'>>info.html
 echo '签到助手密码：'$password>>info.html
 echo '<br>'>>info.html
 echo '<br>'>>info.html
-echo '文件管理器地址：'${OPENSHIFT_APP_DNS}'/filebrowser'>>info.html
+echo '文件管理器地址：https://'${OPENSHIFT_APP_DNS}'/filebrowser'>>info.html
 echo '<br>'>>info.html
 echo '文件管理器密码：'$password>>info.html
 echo '<br>'>>info.html
