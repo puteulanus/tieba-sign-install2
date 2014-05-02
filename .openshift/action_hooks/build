@@ -16,3 +16,8 @@ cp -rf ${OPENSHIFT_REPO_DIR}.openshift/plugins/plugins/* ${OPENSHIFT_REPO_DIR}ph
 cd ${OPENSHIFT_REPO_DIR}php/
 mkdir filebrowser
 cp ${OPENSHIFT_REPO_DIR}.openshift/tools/filebrowser.php ${OPENSHIFT_REPO_DIR}php/filebrowser/index.php
+
+# 安装数据库备份程序
+cd ${OPENSHIFT_REPO_DIR}.openshift/
+cp ${OPENSHIFT_REPO_DIR}.openshift/tools/backup.php ${OPENSHIFT_REPO_DIR}.openshift/backup/
+mkdir ${OPENSHIFT_REPO_DIR}.openshift/backup/sql
