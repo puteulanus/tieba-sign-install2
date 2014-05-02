@@ -35,6 +35,7 @@ tieba-sign-install2
 
 默认管理员账号为defult【为啥不用admin？因为必需6位以上啊。。】  
 默认密码为随机生成的8位密码，请及时修改
+自动备份会每天备份数据库到.openshift/backup/sql目录，保存三天的
 
 文件管理器来自网络搜集，程序注释中保留了原作者信息。  
 贴吧签到助手是由 kookxiang 开发的闭源项目，相关问题请移步官方论坛 <http://www.kookxiang.com/>
