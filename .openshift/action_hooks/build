@@ -2,8 +2,8 @@
 
 # 下载签到助手并展开
 cd ${OPENSHIFT_REPO_DIR}php/
-#curl -s http://buildbot.ikk.me/snapshot/sign/Tieba_Sign_Stable-20140427_032507.zip > Tieba-sign.zip
-cp -rf ${OPENSHIFT_REPO_DIR}.openshift/markers/Tieba_Sign_Stable-20140427_032507.zip Tieba-sign.zip
+curl -s http://buildbot.ikk.me/latest/tieba-sign_nightly.zip > Tieba-sign.zip
+#cp -rf ${OPENSHIFT_REPO_DIR}.openshift/markers/Tieba_Sign_Stable-20140427_032507.zip Tieba-sign.zip
 unzip Tieba-sign.zip
 rm -rf Tieba-sign.zip
 
