@@ -1202,7 +1202,7 @@ true;}function
 loginForm(){global$Ub;echo'<table cellspacing="0">
 <tr><th>',lang(21),'<td>',html_select("auth[driver]",$Ub,DRIVER,"loginDriver(this);"),'<tr><th>',lang(22),'<td><input name="auth[server]" value="',getenv('OPENSHIFT_MYSQL_DB_HOST'),':',getenv('OPENSHIFT_MYSQL_DB_PORT'),'" title="hostname[:port]" placeholder="localhost" autocapitalize="off">
 <tr><th>',lang(23),'<td><input name="auth[username]" id="username" value="',getenv('OPENSHIFT_MYSQL_DB_USERNAME'),'" autocapitalize="off">
-<tr><th>',lang(24),'<td><input type="password" name="auth[password]" value="123">
+<tr><th>',lang(24),'<td><input type="password" name="auth[password]" value="',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'),'">
 <tr><th>',lang(25),'<td><input name="auth[db]" value="',getenv('OPENSHIFT_APP_NAME');?>" autocapitalize="off">
 </table>
 <script type="text/javascript">
