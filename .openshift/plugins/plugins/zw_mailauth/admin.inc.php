@@ -3,8 +3,8 @@ if(!defined('IN_KKFRAME')) exit('Access Denied!');
 ?>
 <div id="authmail_rights">
 <h2>著微邮箱验证插件 - 管理面板</h2>
-<p style="color: #757575; font-size: 12px">当前插件版本：1.1.2 |
-更新日期：2014-3-22 | Coded By <a href="http://jerrys.me"
+<p style="color: #757575; font-size: 12px">当前插件版本：1.1.3 |
+更新日期：2014-4-18 | Coded By <a href="http://jerrys.me"
 	target="_blank">@Jerry Locke</a></p>
 </div>
 
@@ -39,7 +39,7 @@ if(!defined('IN_KKFRAME')) exit('Access Denied!');
 <br>
 
 <h2>设置</h2>
-<form method="post"	action="plugins/zw_mailauth/ajax.php?action=savesetting" id="zw_mailauth_settings" onsubmit="return post_win(this.action, this.id,zw_mailauth_load_set)">
+<form method="post"	action="plugin.php?id=zw_mailauth&action=savesetting" id="zw_mailauth_settings" onsubmit="return post_win(this.action, this.id,zw_mailauth_load_set)">
 <p>
 <input type="checkbox" id="mailaddrepeat" name="mailaddrepeat" value="1" checked />禁止单邮箱重复注册&nbsp;&nbsp;验证链接有效时长：<input type='text' id='deathtime' maxlength="4" name='deathtime'  style='width:60px' onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " />分钟</p>
 <p>

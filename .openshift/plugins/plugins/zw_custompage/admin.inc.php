@@ -49,7 +49,7 @@ if(!defined('IN_KKFRAME')) exit('Access Denied!');
 
 <h2>全局设置</h2>
 <form method="post"
-	action="plugins/zw_custompage/ajax.php?action=savesetting"
+	action="plugin.php?id=zw_custompage&action=savesetting"
 	id="settings" onsubmit="return post_win(this.action, this.id,zw_custompage_load_set)">
 <p><input type="checkbox" id="page_switch" name="page_switch" value="1" checked />启用自定义页面&nbsp;&nbsp;<input type="checkbox" id="footer_text_switch" name="footer_text_switch" value="1" checked />启用页底文字&nbsp;&nbsp;<input
 	type="checkbox" id="footer_js_switch" name="footer_js_switch" value="1" checked />启用页底代码&nbsp;&nbsp;<input

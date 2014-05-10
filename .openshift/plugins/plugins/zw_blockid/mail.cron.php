@@ -18,7 +18,7 @@ $need_report_uid = array_intersect($block_error_uid, $sendmail_uid); //数组合
 foreach($need_report_uid as $smid) { // 将报告邮件逐一加入邮件队列
 	sendBlockReport(intval($smid));
 } 
-saveSetting('mail_queue',count($need_report_uid));
+saveSetting('mail_queue',1);
 define('CRON_FINISHED', true);
 
 function sendBlockReport($smid) {
