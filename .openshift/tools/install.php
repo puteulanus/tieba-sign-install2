@@ -19,6 +19,7 @@ switch($_GET['step']){
 		break;
 	case 'setup':// 填写用户名密码
 		$content = '<div class="config"><p>请填写你喜欢的管理员账号和密码。<br>注意，用户名至少要6个字符(即2个中文 或 6个英文)，不可大于24个字符。</p><br>';
+		$content .= '<form action="./?step=install" method="post" onsubmit="show_waiting();">';
 		$content .= '<br><p><span>管理员用户名:</span><input type="text" name="username" required /></p>';
 		$content .= '<p><span>管理员密码:</span><input type="password" name="password" required /></p>';
 		$content .= '<p><span>管理员邮箱:</span><input type="text" name="email" required /></p>';
@@ -51,8 +52,8 @@ switch($_GET['step']){
 		// 设定管理员信息
 		$username = $_POST['username'];// 获取用户名
 		$password = $_POST['password'];// 获取密码明文
-		writepd($username,'un.txt')// 用户名写入un.txt文件中备用
-		writepd($password,'pd.txt')// 密码写入pd.txt文件中备用
+		writepd($username,'un.txt');// 用户名写入un.txt文件中备用
+		writepd($password,'pd.txt');// 密码写入pd.txt文件中备用
 		$username = addslashes($_POST['username']);// 管理员共户名
 		$password = md5($syskey.md5($_POST['password']).$syskey);// 管理员密码
 		$email = addslashes($_POST['email']);// 管理员邮箱
@@ -87,7 +88,7 @@ switch($_GET['step']){
 		$content = '<?php'.PHP_EOL.'/* Auto-generated config file */'.PHP_EOL.'$_config = ';
 		$content .= var_export($_config, true).';'.PHP_EOL.'?>';
 		file_put_contents($config_file, $content);
-		//exec("deploy.sh");// 进行最后配置
+		exec("./deploy.sh");// 进行最后配置
 		$content = '<p>贴吧签到助手 已经成功安装！</p><p>要正常签到，请为脚本 cron.php 添加每分钟一次的计划任务。</p><p>系统默认关闭用户注册，如果有需要，请到后台启用用户注册功能。</p><br><p class="btns"><button onclick="location.href=\'../\';">登录 &raquo;</button>';
 		show_install_page('安装成功', $content);
 }
