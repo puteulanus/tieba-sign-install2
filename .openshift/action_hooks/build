@@ -12,6 +12,10 @@ cd ${OPENSHIFT_REPO_DIR}.openshift/plugins
 cp -rf ${OPENSHIFT_REPO_DIR}.openshift/plugins/cron/*.php ${OPENSHIFT_REPO_DIR}php/system/function/cron/
 cp -rf ${OPENSHIFT_REPO_DIR}.openshift/plugins/plugins/* ${OPENSHIFT_REPO_DIR}php/plugins/
 
+# 安装风格
+cd ${OPENSHIFT_REPO_DIR}.openshift/plugins
+cp -rf ${OPENSHIFT_REPO_DIR}.openshift/themes/* ${OPENSHIFT_REPO_DIR}php/template/
+
 # 安装文件管理器
 cd ${OPENSHIFT_REPO_DIR}php/
 mkdir filebrowser
