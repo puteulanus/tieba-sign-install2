@@ -23,14 +23,10 @@ echo 'AuthType Basic'>>.htaccess
 echo 'AuthUserFile '${OPENSHIFT_REPO_DIR}'php/filebrowser/.htpasswd'>>.htaccess
 echo 'Require valid-user'>>.htaccess
 
-
 # 修改文件管理器密码
 md5=`echo -n $password|md5sum|awk '{print $1}'`
 echo '<?php exit;?>{"'$username'":{"name":"'$username'","password":"'$md5'","role":"root","status":0}}'>${OPENSHIFT_REPO_DIR}php/filebrowser/data/system/member.php
 mv -f ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/admin ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/$username
-#echo '<?php'>config.php
-#echo '$password="'$password'"'>>config.php
-#echo '?>'>>config.php
 
 # 生成密码页面
 cd ${OPENSHIFT_REPO_DIR}php/install/
