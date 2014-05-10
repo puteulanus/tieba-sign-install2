@@ -22,6 +22,10 @@ md5=`echo -n $password|md5sum|awk '{print $1}'`
 echo '<?php exit;?>{"'$username'":{"name":"'$username'","password":"'$md5'","role":"root","status":0}}'>${OPENSHIFT_REPO_DIR}php/filebrowser/data/system/member.php
 mv -f ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/admin ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/$username
 
+# 备份配置文件
+cd ${OPENSHIFT_REPO_DIR}php/system/
+cp -f ${OPENSHIFT_REPO_DIR}php/system/config.inc.php ${OPENSHIFT_REPO_DIR}php/system/bak-config.inc.php
+
 # 删除安装文件
 cd ${OPENSHIFT_REPO_DIR}php/install/
 rm -rf ${OPENSHIFT_REPO_DIR}php/install/deploy.sh
