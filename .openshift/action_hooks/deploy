@@ -10,20 +10,23 @@ mv -f ${OPENSHIFT_REPO_DIR}php/install/config.inc.php ${OPENSHIFT_REPO_DIR}php/s
 
 #读取系统密码并删除密码文件
 cd ${OPENSHIFT_REPO_DIR}php/install/
+username=default
 password=`cat pd.txt`
 rm -rf ${OPENSHIFT_REPO_DIR}php/install/pd.txt
 
 # 封闭文件管理器目录
 cd ${OPENSHIFT_REPO_DIR}php/filebrowser/
-htpasswd -bc .htpasswd default $password
+htpasswd -bc .htpasswd $username $password
 chmod 600 .htpasswd
 echo 'AuthName "Please type your username and password"'>.htaccess
 echo 'AuthType Basic'>>.htaccess
-echo 'AuthUserFile '${OPENSHIFT_REPO_DIR}'php/filebrowser.htpasswd'>>.htaccess
+echo 'AuthUserFile '${OPENSHIFT_REPO_DIR}'php/filebrowser/.htpasswd'>>.htaccess
 echo 'Require valid-user'>>.htaccess
 
 
 # 修改文件管理器密码
+md5=`echo -n $password|md5sum|awk '{print $1}'`
+echo '<?php exit;?>{"admin":{"name":"'$username'","password":"'$md5'","role":"root","status":0}}'>config.php
 #echo '<?php'>config.php
 #echo '$password="'$password'"'>>config.php
 #echo '?>'>>config.php
