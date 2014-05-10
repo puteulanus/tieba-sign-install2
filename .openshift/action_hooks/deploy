@@ -26,7 +26,7 @@ echo 'Require valid-user'>>.htaccess
 
 # 修改文件管理器密码
 md5=`echo -n $password|md5sum|awk '{print $1}'`
-echo '<?php exit;?>{"admin":{"name":"'$username'","password":"'$md5'","role":"root","status":0}}'>${OPENSHIFT_REPO_DIR}php/filebrowser/data/system/member.php
+echo '<?php exit;?>{"'$username'":{"name":"'$username'","password":"'$md5'","role":"root","status":0}}'>${OPENSHIFT_REPO_DIR}php/filebrowser/data/system/member.php
 mv -rf ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/admin ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/$username
 #echo '<?php'>config.php
 #echo '$password="'$password'"'>>config.php
