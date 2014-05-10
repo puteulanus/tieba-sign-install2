@@ -15,9 +15,9 @@ rm -rf ${OPENSHIFT_REPO_DIR}php/install/pd.txt
 
 # 设定文件管理器密码
 cd ${OPENSHIFT_REPO_DIR}php/filebrowser/
-echo '<?php'>config.php
-echo '$password="'$password'"'>>config.php
-echo '?>'>>config.php
+#echo '<?php'>config.php
+#echo '$password="'$password'"'>>config.php
+#echo '?>'>>config.php
 
 # 生成密码页面
 cd ${OPENSHIFT_REPO_DIR}php/install/
