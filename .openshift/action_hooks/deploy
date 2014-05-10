@@ -1,60 +1,6 @@
 #!/bin/bash
 
 # 复制安装文件
-cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/quick-install.php ${OPENSHIFT_REPO_DIR}php/install/quick-install.php
-
-# 数据库初始化
-cd ${OPENSHIFT_REPO_DIR}php/install/
-php quick-install.php
-mv -f ${OPENSHIFT_REPO_DIR}php/install/config.inc.php ${OPENSHIFT_REPO_DIR}php/system/
-
-#读取系统密码并删除密码文件
-cd ${OPENSHIFT_REPO_DIR}php/install/
-username=default
-password=`cat pd.txt`
-rm -rf ${OPENSHIFT_REPO_DIR}php/install/pd.txt
-
-# 封闭文件管理器目录
-cd ${OPENSHIFT_REPO_DIR}php/filebrowser/
-htpasswd -bc .htpasswd $username $password
-chmod 600 .htpasswd
-echo 'AuthName "Please type your username and password"'>.htaccess
-echo 'AuthType Basic'>>.htaccess
-echo 'AuthUserFile '${OPENSHIFT_REPO_DIR}'php/filebrowser/.htpasswd'>>.htaccess
-echo 'Require valid-user'>>.htaccess
-
-# 修改文件管理器密码
-md5=`echo -n $password|md5sum|awk '{print $1}'`
-echo '<?php exit;?>{"'$username'":{"name":"'$username'","password":"'$md5'","role":"root","status":0}}'>${OPENSHIFT_REPO_DIR}php/filebrowser/data/system/member.php
-mv -f ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/admin ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/$username
-
-# 生成密码页面
-cd ${OPENSHIFT_REPO_DIR}php/install/
-echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' >info.html
-echo '<font color="#FF0000">' >>info.html
-echo '    此页面内容非常重要，请牢记后'>>info.html
-echo '    <a href="https://'${OPENSHIFT_APP_DNS}'/install/delete.php">'>>info.html
-echo '        <font color="#0000FF">'>>info.html
-echo '            点我'>>info.html
-echo '        </font>'>>info.html
-echo '    </a>'>>info.html
-echo '    删除页面'>>info.html
-echo '</font>'>>info.html
-echo '<br>'>>info.html
-echo '<br>'>>info.html
-echo '签到助手管理员账号：default'>>info.html
-echo '<br>'>>info.html
-echo '签到助手密码：'$password>>info.html
-echo '<br>'>>info.html
-echo '<br>'>>info.html
-echo '文件管理器地址：https://'${OPENSHIFT_APP_DNS}'/filebrowser'>>info.html
-echo '<br>'>>info.html
-echo '文件管理器密码：'$password>>info.html
-echo '<br>'>>info.html
-# 密码页面删除链接
-echo '<?php'>delete.php
-echo 'unlink("info.html")'>>delete.php
-echo '?>'>>delete.php
-
-# 删除安装文件
-rm -rf ${OPENSHIFT_REPO_DIR}php/install/quick-install.php
+mv ${OPENSHIFT_REPO_DIR}php/install/index.php ${OPENSHIFT_REPO_DIR}php/install/index.php.bak
+cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/install.php ${OPENSHIFT_REPO_DIR}php/install/index.php
+cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/deploy.sh ${OPENSHIFT_REPO_DIR}php/install/deploy.sh
