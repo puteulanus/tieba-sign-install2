@@ -15,7 +15,7 @@ cp -rf ${OPENSHIFT_REPO_DIR}.openshift/plugins/plugins/* ${OPENSHIFT_REPO_DIR}ph
 # 安装文件管理器
 cd ${OPENSHIFT_REPO_DIR}php/
 mkdir filebrowser
-cp ${OPENSHIFT_REPO_DIR}.openshift/tools/filebrowser/* ${OPENSHIFT_REPO_DIR}php/filebrowser/
+cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/filebrowser/* ${OPENSHIFT_REPO_DIR}php/filebrowser/
 
 # 安装数据库备份程序
 cd ${OPENSHIFT_REPO_DIR}.openshift/
