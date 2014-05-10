@@ -13,8 +13,15 @@ cd ${OPENSHIFT_REPO_DIR}php/install/
 password=`cat pd.txt`
 rm -rf ${OPENSHIFT_REPO_DIR}php/install/pd.txt
 
-# 设定文件管理器密码
+# 封闭文件管理器目录
 cd ${OPENSHIFT_REPO_DIR}php/filebrowser/
+htpasswd -c .htpasswd default $password
+echo 'AuthName "Please type your username and password"'>.htaccess
+echo 'AuthType Basic'>.htaccess
+echo 'AuthUserFile '${OPENSHIFT_REPO_DIR}'php/filebrowser.htpasswd'>.htaccess
+echo 'Require valid-user'>.htaccess
+
+# 修改文件管理器密码
 #echo '<?php'>config.php
 #echo '$password="'$password'"'>>config.php
 #echo '?>'>>config.php
