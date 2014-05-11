@@ -26,9 +26,6 @@ mv -f ${OPENSHIFT_REPO_DIR}php/filebrowser/data/User/admin ${OPENSHIFT_REPO_DIR}
 cd ${OPENSHIFT_REPO_DIR}php/system/
 cp -f ${OPENSHIFT_REPO_DIR}php/system/config.inc.php ${OPENSHIFT_REPO_DIR}.openshift/config/config.inc.php
 
-# 等待
-sleep 25
-
 # 删除安装文件
 cd ${OPENSHIFT_REPO_DIR}php/install/
 rm -rf ${OPENSHIFT_REPO_DIR}php/install/deploy.sh
