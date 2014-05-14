@@ -4,3 +4,7 @@
 mv ${OPENSHIFT_REPO_DIR}php/install/index.php ${OPENSHIFT_REPO_DIR}php/install/index.php.bak
 cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/install.php ${OPENSHIFT_REPO_DIR}php/install/index.php
 cp -rf ${OPENSHIFT_REPO_DIR}.openshift/tools/deploy.sh ${OPENSHIFT_REPO_DIR}php/install/deploy.sh
+
+# 禁止APC缓存
+cd ${OPENSHIFT_REPO_DIR}php
+echo 'php_value apc.cache_by_default off' > ${OPENSHIFT_REPO_DIR}php/.htaccess
