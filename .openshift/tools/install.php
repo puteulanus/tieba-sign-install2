@@ -14,19 +14,19 @@ if($_config){
 // 安装界面
 switch($_GET['step']){
 	default:
-		$content = '<p>欢迎使用 贴吧签到助手 安装向导！</p><p>本程序将会指引你在服务器上配置好“贴吧签到助手”</p><p>点击右侧的“下一步”按钮开始</p><p class="btns"><button onclick="location.href=\'./?step=setup\';">下一步 &raquo;</button>';
+		$content = '<p>欢迎使用 贴吧签到助手 安装向导！</p><p>本程序将会指引你在服务器上配置好“贴吧签到助手”</p><p>点击右侧的“下一步”按钮开始</p><br><p>Openshift one-key installer. Thanks to <a href="http://www.puteulanus.com" target="_blank">Puteulanus</a></p><p class="btns"><button onclick="location.href=\'./index.php?step=database\';">下一步 &raquo;</button>';
 		show_install_page('Welcome', $content);
 		break;
-	case 'setup':// 填写用户名密码
-		$content = '<div class="config"><p>请填写你喜欢的管理员账号和密码。<br>注意，用户名至少要6个字符(即2个中文 或 6个英文)，不可大于24个字符。</p><br>';
-		$content .= '<form action="./?step=install" method="post" onsubmit="show_waiting();">';
-		$content .= '<br><p><span>管理员用户名:</span><input type="text" name="username" required /></p>';
+	case 'database':// 填写用户名密码
+		$content = '<div class="config"><p>请设置站点管理员信息</p><br>';
+		$content .= '<form action="./index.php?step=install" method="post" onsubmit="show_waiting();">';
+		$content .= '<p><span>管理员用户名:</span><input type="text" name="username" required /></p>';
 		$content .= '<p><span>管理员密码:</span><input type="password" name="password" required /></p>';
 		$content .= '<p><span>管理员邮箱:</span><input type="text" name="email" required /></p>';
 		$content .= '<p class="btns"><span>&nbsp;</span><input type="submit" value="下一步 &raquo;" /></p>';
 		$content .= '</form></div><div class="waiting hidden"><p>程序正在执行必要的安装步骤，请耐心等待...</p></div>';
 		$content .= '<script type="text/javascript">function show_waiting(){ $(".config").hide(); $(".waiting").show(); }</script>';
-		show_install_page('管理员配置', $content);
+		show_install_page('站点配置', $content);
 		break;
 	case 'install':// 安装
 		// 设置数据库信息
@@ -35,26 +35,28 @@ switch($_GET['step']){
 		$db_username = getenv('OPENSHIFT_MYSQL_DB_USERNAME');// 数据库用户名
 		$db_password = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');// 数据库密码
 		$db_name = getenv('OPENSHIFT_APP_NAME');// 数据库名
-		$db_pconnect = False; // 不保持数据库连接
-		
+		$db_pconnect = false;// 不保持数据库连接
+
 		// 数据库初始化
 		$function = $db_pconnect ? 'mysql_connect' : 'mysql_pconnect';
 		$link = mysql_connect("{$db_host}:{$db_port}", $db_username, $db_password);
+		if(!$link) show_back('数据库配置', '错误：无法连接数据库服务器！</p><p>'.mysql_error());
 		$selected = mysql_select_db($db_name, $link);
 		if(!$selected){
 			// 尝试新建
 			mysql_query("CREATE DATABASE `{$db_name}`", $link);
 			$selected = mysql_select_db($db_name, $link);
+			if(!$selected) show_back('数据库配置', '错误：指定的数据库不可用</p><p>'.mysql_error());
 		}
 		mysql_query("SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary");
 		$syskey = random(32);
-		
+
 		// 设定管理员信息
 		$un = $_POST['username'];// 获取用户名
 		$pd = $_POST['password'];// 获取密码明文
-		$username = addslashes($_POST['username']);// 管理员共户名
-		$password = md5($syskey.md5($_POST['password']).$syskey);// 管理员密码
-		$email = addslashes($_POST['email']);// 管理员邮箱
+		$username = addslashes($_POST['username']);
+		$password = md5($syskey.md5($_POST['password']).$syskey);
+		$email = addslashes($_POST['email']);
 		if(!$username || !$password || !$email) show_back('注册账号', '您输入的信息不完整');
 		if(preg_match('/[<>\'\\"]/i', $username)) show_back('注册账号', '用户名中有被禁止使用的关键字');
 		if(strlen($username) < 6) show_back('注册账号', '用户名至少要6个字符(即2个中文 或 6个英文)，请修改');
@@ -62,6 +64,7 @@ switch($_GET['step']){
 		$install_script = file_get_contents(dirname(__FILE__).'/install.sql');
 		preg_match('/version ([0-9a-z.]+)/i', $install_script, $match);
 		$version = trim($match[1]);
+		if(!$version) show_back('正在安装', '安装脚本有误，请重新上传');
 		$err = runquery($install_script, $link);
 		mysql_query("INSERT INTO member SET username='{$username}', password='{$password}', email='{$email}'");
 		$uid = mysql_insert_id($link);
@@ -70,6 +73,7 @@ switch($_GET['step']){
 		saveSetting('jquery_mode', 2);
 		saveSetting('admin_uid', $uid);
 		saveSetting('SYS_KEY', $syskey);
+		if($err) show_back('正在安装', '安装过程出现错误:</p><p>'.mysql_error());
 		
 		// 设定配置文件内容
 		$_config = array(
@@ -87,7 +91,7 @@ switch($_GET['step']){
 		$content .= var_export($_config, true).';'.PHP_EOL.'?>';
 		file_put_contents($config_file, $content);
 		exec("./deploy.sh ".$un." ".$pd);// 进行最后配置
-		$content = '<p>贴吧签到助手 已经成功安装！</p><p>要正常签到，请为脚本 cron.php 添加每分钟一次的计划任务。</p><p>系统默认关闭用户注册，如果有需要，请到后台启用用户注册功能。</p><br><p class="btns"><button onclick="location.href=\'../\';">登录 &raquo;</button>';
+		$content = '<p>贴吧签到助手 已经成功安装！</p><p>系统默认关闭用户注册，如果有需要，请到后台启用用户注册功能。</p><p style="color: red">Openshift 用户如出现错误请前往管理界面重启应用</p><br><p class="btns"><button onclick="location.href=\'../\';">登录 &raquo;</button>';
 		show_install_page('安装成功', $content);
 }
 
