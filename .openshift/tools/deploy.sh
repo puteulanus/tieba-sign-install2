@@ -30,6 +30,12 @@ sleep 2
 php ${OPENSHIFT_REPO_DIR}php/cron.php
 sleep 2
 php ${OPENSHIFT_REPO_DIR}php/cron.php
+sleep 2
+php ${OPENSHIFT_REPO_DIR}php/cron.php
+sleep 2
+php ${OPENSHIFT_REPO_DIR}php/cron.php
+sleep 2
+php ${OPENSHIFT_REPO_DIR}php/cron.php
 
 # 删除安装文件
 cd ${OPENSHIFT_REPO_DIR}php/install/
