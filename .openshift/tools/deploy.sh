@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# 读取用户名密码并删除文件
-cd ${OPENSHIFT_REPO_DIR}php/install/
-username=`cat un.txt`
-password=`cat pd.txt`
-rm -rf ${OPENSHIFT_REPO_DIR}php/install/un.txt
-rm -rf ${OPENSHIFT_REPO_DIR}php/install/pd.txt
+# 读取用户名密码
+username=$1
+password=$2
 
 # 封闭文件管理器目录
 cd ${OPENSHIFT_REPO_DIR}php/filebrowser/
