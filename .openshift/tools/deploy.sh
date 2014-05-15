@@ -24,9 +24,13 @@ cd ${OPENSHIFT_REPO_DIR}php/system/
 cp -f ${OPENSHIFT_REPO_DIR}php/system/config.inc.php ${OPENSHIFT_REPO_DIR}.openshift/config/config.inc.php
 
 # 执行cron消除错误提示
-cd ${OPENSHIFT_REPO_DIR}php/
-php ${OPENSHIFT_REPO_DIR}php/cron.php
-sleep 5
+cd ${OPENSHIFT_REPO_DIR}php/system/function/cron/
+php ${OPENSHIFT_REPO_DIR}php/system/function/cron/daily.php
+php ${OPENSHIFT_REPO_DIR}php/system/function/cron/update_tieba.php
+php ${OPENSHIFT_REPO_DIR}php/system/function/cron/sign.php
+php ${OPENSHIFT_REPO_DIR}php/system/function/cron/ext_sign.php
+php ${OPENSHIFT_REPO_DIR}php/system/function/cron/mail.php
+php ${OPENSHIFT_REPO_DIR}php/system/function/cron/sign_retry.php
 
 # 删除安装文件
 cd ${OPENSHIFT_REPO_DIR}php/install/
