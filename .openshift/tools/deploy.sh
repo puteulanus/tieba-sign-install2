@@ -24,17 +24,11 @@ cd ${OPENSHIFT_REPO_DIR}php/system/
 cp -f ${OPENSHIFT_REPO_DIR}php/system/config.inc.php ${OPENSHIFT_REPO_DIR}.openshift/config/config.inc.php
 
 # 执行cron
-sleep 10
-php ${OPENSHIFT_REPO_DIR}php/cron.php
 sleep 5
 php ${OPENSHIFT_REPO_DIR}php/cron.php
-sleep 5
+sleep 2
 php ${OPENSHIFT_REPO_DIR}php/cron.php
-sleep 5
-php ${OPENSHIFT_REPO_DIR}php/cron.php
-sleep 5
-php ${OPENSHIFT_REPO_DIR}php/cron.php
-sleep 5
+sleep 2
 php ${OPENSHIFT_REPO_DIR}php/cron.php
 
 # 删除安装文件
