@@ -20,7 +20,7 @@ class plugin_zw_blockid extends Plugin {
 			'cron' => array('id' => 'zw_blockid/mail', 'order' => 103),
 			),
 		);
-	var $version = '1.2.7';
+	var $version = '1.2.8';
 
 	function install() {
 		runquery("CREATE TABLE `zw_blockid_list` (
@@ -54,9 +54,9 @@ DELETE FROM `plugin_var` WHERE `pluginid`='zw_blockid';
 ");
 	} 
 
-	function checkCompatibility(){
-		if(version_compare(VERSION, '1.14.4.24', '<')) showmessage('签到助手版本过低，请升级');
-	}
+	function checkCompatibility() {
+		if (version_compare(VERSION, '1.14.4.24', '<')) showmessage('签到助手版本过低，请升级');
+	} 
 
 	function page_footer_js() {
 		echo '<script src="plugins/zw_blockid/zw_blockid.js"></script>';
@@ -75,22 +75,23 @@ DELETE FROM `plugin_var` WHERE `pluginid`='zw_blockid';
 			UPDATE cron SET id='zw_blockid/cron/zw_blockid_daily' WHERE id='zw_blockid_daily';
 			UPDATE cron SET id='zw_blockid/cron/zw_blockid_mail' WHERE id='zw_blockid_mail';");
 			return '1.2.5';
-		}
+		} 
 		if ($nowversion == '1.2.5') {
 			runquery("UPDATE cron SET id='zw_blockid/cron_blockid' WHERE id='zw_blockid' OR id='zw_blockid/cron/zw_blockid';
 			UPDATE cron SET id='zw_blockid/cron_daily' WHERE id='zw_blockid_daily' OR id='zw_blockid/cron/zw_blockid_daily';
 			UPDATE cron SET id='zw_blockid/cron_mail' WHERE id='zw_blockid_mail' OR id='zw_blockid/cron/zw_blockid_mail';");
 			return '1.2.6';
-		}
+		} 
 		if ($nowversion == '1.2.6') {
 			runquery("UPDATE cron SET id='zw_blockid/blockid' WHERE id='zw_blockid/cron_blockid';
 			UPDATE cron SET id='zw_blockid/daily' WHERE id='zw_blockid/cron_daily';
 			UPDATE cron SET id='zw_blockid/mail' WHERE id='zw_blockid/cron_mail';");
-		}
+		} 
 	} 
 
 	function handleAction() {
 		global $uid;
+		if (!$uid) exit ('Access Denied!');
 		$data = array ();
 		$data ['msgx'] = 1;
 		switch ($_GET ['action']) {
@@ -211,7 +212,7 @@ DELETE FROM `plugin_var` WHERE `pluginid`='zw_blockid';
 				$re = $this -> blockid ($test_blockid ['fid'], $test_blockid ['blockid'], 1, $uid);
 				if ($re['errno'] == -1) {
 					$data ['msg'] = "JSON解析失败！";
-				} elseif ($re['errno'] === 0) {
+				} elseif ($re['errno'] == 0) {
 					$data ['msg'] = "封禁成功！封禁账号：{$test_blockid['blockid']}，所在贴吧：{$test_blockid['tieba']}，FID为{$test_blockid['fid']}";
 				} else {
 					$data ['msg'] = "封禁失败！返回信息：{$re['errmsg']}，封禁账号：{$test_blockid['blockid']}，所在贴吧：{$test_blockid['tieba']}，FID为{$test_blockid['fid']}";

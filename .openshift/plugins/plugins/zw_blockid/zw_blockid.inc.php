@@ -3,7 +3,7 @@
 	<p style="color: #757575; font-size: 12px">
 		本插件可以每天定时对指定贴吧的指定ID进行封禁操作。前提为您绑定的百度ID有指定贴吧的大吧主或小吧主权限。
 		<br>
-		当前插件版本：1.2.7 更新日期：2014年04月30日 |&nbsp;&nbsp;作者:
+		当前插件版本：1.2.8 更新日期：2014年05月22日 |&nbsp;&nbsp;作者:
 		<a href="http://jerrys.me" target="_blank">@JerryLocke</a>&nbsp;&nbsp;
 		感谢:
 		<a href="http://www.baidu.com/p/%E6%98%9F%E5%BC%A6%E9%9B%AA" target="_blank">@星弦雪</a>&nbsp;提供的Cron Wiki
