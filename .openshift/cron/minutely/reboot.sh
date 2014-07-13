@@ -2,8 +2,7 @@
 
 #配置你的Openshift ssh用户名
 sshid=${OPENSHIFT_APP_UUID}
-}
-  
+
 #脚本运行部分
 curl -I ${OPENSHIFT_APP_DNS} 2> /dev/null | head -1 | grep -q 200
 s=$?
