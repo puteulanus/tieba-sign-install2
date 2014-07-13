@@ -4,8 +4,9 @@ export TZ="Asia/Shanghai"
 
 #判断是否为重启时间
 hour="`date +%H%M`"
-if [ "$hour" = "0010" -o "$hour" = "0020"]; then
+if [ "$hour" = "0010" -o "$hour" = "0020" ]; then
   ctl_all restart
+  exit
 fi
 
 #配置你的Openshift ssh用户名
