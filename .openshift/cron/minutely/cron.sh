@@ -1,1 +1,3 @@
-php ${OPENSHIFT_REPO_DIR}php/cron.php
+#!/bin/bash
+
+exec php "${OPENSHIFT_REPO_DIR}php/cron.php"
