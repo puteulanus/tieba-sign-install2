@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export TZ="Asia/Shanghai"
+
 #配置你的Openshift ssh用户名
 sshid=${OPENSHIFT_APP_UUID}
 
