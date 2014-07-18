@@ -1,3 +1,4 @@
 #!/bin/bash
 
-exec php "${OPENSHIFT_REPO_DIR}php/cron.php"
+php "${OPENSHIFT_REPO_DIR}php/cron.php" ||
+  gear restart --all-cartridges
