@@ -1,4 +1,3 @@
 #!/bin/bash
 
-php "${OPENSHIFT_REPO_DIR}php/cron.php" ||
-  gear restart --all-cartridges
+php "${OPENSHIFT_REPO_DIR}php/cron.php" || ( echo 'Cron task failed.' >&2 )

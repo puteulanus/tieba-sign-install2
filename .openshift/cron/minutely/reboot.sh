@@ -7,8 +7,11 @@ hour="`date +%H%M`"
 if [ "$hour" = "0010" -o "$hour" = "0020" -o "$hour" = "1200" ]
 then
   echo "Scheduled rebooting at $(date) ..." >&2
+  (
+  sleep 2
   gear restart --all-cartridges
   echo "Rebooted at $(date) ..." >&2
+  ) &
   exit
 fi
 
@@ -19,8 +22,11 @@ then
   if ! curl -s -I -m 30 http://"${OPENSHIFT_APP_DNS}" | head -1 | grep -q '[23]0[0-9]'
   then
     echo "Server not responding, rebooting at $(date) ..." >&2
+    (
+    sleep 2
     gear restart --all-cartridges
     echo "Rebooted at $(date) ..." >&2
+    ) &
     exit
   fi
 fi
