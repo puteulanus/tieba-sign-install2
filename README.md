@@ -1,5 +1,7 @@
-tieba-sign-install2
+tieba-sign-install2【已失效】
 ===================
+
+[2014年8月30日]由于KK的签到项目停止维护并关闭API，tieba-sign-install2贴吧签到助手安装项目关闭。
 
 用于在Openshift创建应用时直接引用自动安装签到助手。
 
